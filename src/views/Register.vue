@@ -104,6 +104,7 @@ export default {
         this.error = false;
         this.errorMsg = "";
         const firebaseAuth = await firebase.auth();
+        // 创建账号
         const createUser = await firebaseAuth.createUserWithEmailAndPassword(
           this.email,
           this.password
