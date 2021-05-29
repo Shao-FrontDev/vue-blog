@@ -28,12 +28,11 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
+      // let bool = Boolean(user);
       this.$store.commit("updateUser", user);
+
       if (user) {
         this.$store.dispatch("getCurrentUser");
-        setTimeout(() => {
-          console.log(this.$store.state.profileEmail);
-        }, 2000);
       }
     });
     this.checkRoute();

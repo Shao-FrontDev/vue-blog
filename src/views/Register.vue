@@ -100,7 +100,6 @@ export default {
         this.lastName !== "" &&
         this.username !== ""
       ) {
-        console.log("success");
         this.error = false;
         this.errorMsg = "";
         const firebaseAuth = await firebase.auth();
@@ -124,7 +123,6 @@ export default {
 
         return;
       }
-      console.log("fail");
       this.error = true;
       this.errorMsg = "Please fill out all the fields!";
       return;

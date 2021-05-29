@@ -45,7 +45,9 @@ export default new Vuex.Store({
       console.log(state.editPost);
     },
     setProfileInfo(state, doc) {
+      console.log("setProfileInfo", typeof state.user);
       state.profileId = doc.id;
+      console.log("doc.data", doc.data());
       state.profileEmail = doc.data().email;
       state.profileFirstName = doc.data().firstName;
       state.profileLastName = doc.data().lastName;
@@ -57,6 +59,7 @@ export default new Vuex.Store({
         state.profileLastName.match(/(\b\S)?/g).join("");
     },
     updateUser(state, payload) {
+      console.log("updateUser", payload);
       state.user = payload;
     },
   },
@@ -68,7 +71,6 @@ export default new Vuex.Store({
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
       commit("setProfileInitials");
-      console.log(dbResults);
     },
   },
   modules: {},

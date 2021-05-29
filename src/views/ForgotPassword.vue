@@ -62,7 +62,6 @@ export default {
   methods: {
     resetPassword() {
       this.loading = true;
-      console.log(this.loading);
       firebase
         .auth()
         .sendPasswordResetEmail(this.email)

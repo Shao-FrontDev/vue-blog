@@ -17,10 +17,10 @@
           >
         </ul>
         <div
+          v-if="user"
           class="profile"
           @click="toggleProfileMenu"
           ref="profile"
-          v-if="user"
         >
           <span>{{
             this.$store.state.profileInitials
@@ -153,11 +153,11 @@ export default {
       firebase.auth().signOut();
       window.location.reload();
     },
-    computed: {
-      // 待解决的bug
-      user() {
-        return this.$store.state.user;
-      },
+  },
+  computed: {
+    // 待解决的bug
+    user() {
+      return this.$store.state.user;
     },
   },
 };
