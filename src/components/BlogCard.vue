@@ -80,7 +80,7 @@ export default {
       transition: 0.5s ease all;
 
       &:hover {
-        background-color: #333333;
+        background-color: #ffd03f;
 
         .edit,
         .delete {

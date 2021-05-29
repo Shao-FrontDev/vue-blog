@@ -11,6 +11,10 @@
 <script>
 import Navigation from "./components/Navigation.vue";
 import Footer from "./components/Footer.vue";
+
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   name: "app",
   components: {
@@ -24,6 +28,8 @@ export default {
   },
   created() {
     this.checkRoute();
+    let message = firebase.auth().currentUser;
+    console.log(message);
   },
   mounted() {},
   methods: {
@@ -51,4 +57,8 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 @import "./assets/styles/global.scss";
+
+.app-wrapper {
+  min-width: 320px;
+}
 </style>

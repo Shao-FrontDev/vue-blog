@@ -1,11 +1,6 @@
 <template>
   <header>
     <nav class="container">
-      <div class="branding">
-        <router-link class="header" :to="{ name: 'Home' }"
-          >FireBlogs</router-link
-        >
-      </div>
       <div class="nav-links">
         <ul v-show="!mobile">
           <router-link class="link" :to="{ name: 'Home' }"
@@ -21,6 +16,11 @@
             >Login/Register</router-link
           >
         </ul>
+      </div>
+      <div class="branding">
+        <router-link class="header" :to="{ name: 'Home' }">
+          <github class="github-icon" />
+        </router-link>
       </div>
     </nav>
     <menuIcon
@@ -49,10 +49,13 @@
 
 <script>
 import menuIcon from "../assets/Icons/bars-regular.svg";
+import github from "../assets/Icons/github.svg";
+
 export default {
   name: "navigation",
   components: {
     menuIcon,
+    github,
   },
   data() {
     return {
@@ -94,13 +97,25 @@ header {
     padding: 0 8px;
     transition: 0.3s color ease;
 
-    &:hover {
-      color: #1eb8b8;
+    &:hover::after {
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      margin-left: -12px;
+      margin-top: -12px;
+      content: "";
+      display: block;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #ffd03f;
+      z-index: -1;
     }
   }
   nav {
     display: flex;
-    padding: 25px 0;
+    padding: 10px 0;
 
     .branding {
       display: flex;
@@ -110,6 +125,16 @@ header {
         font-weight: 600;
         font-size: 24px;
         text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .github-icon {
+          cursor: pointer;
+          height: 25px;
+          width: auto;
+          margin-right: 30px;
+        }
       }
     }
     .nav-links {
@@ -117,24 +142,37 @@ header {
       display: flex;
       flex: 1;
       align-items: center;
-      justify-content: flex-end;
 
       ul {
         margin-right: 32px;
         .link {
-          margin-right: 32px;
-        }
-        .link:last-child {
-          margin-right: 0;
+          margin-right: 5px;
+          font-weight: bolder;
+          position: relative;
+          &.router-link-exact-active::after {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -12px;
+            content: "";
+            display: block;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            background-color: #ffd03f;
+            border: 3px solid #ffd03f;
+            z-index: -1;
+          }
         }
       }
     }
   }
-
   .menu-icon {
     cursor: pointer;
     position: absolute;
-    top: 32px;
+    top: 10px;
     right: 25px;
     height: 25px;
     width: auto;
@@ -155,6 +193,9 @@ header {
     .link {
       padding: 15px 0;
       color: #fff;
+      &:hover::after {
+        display: none;
+      }
     }
   }
 
