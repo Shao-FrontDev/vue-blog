@@ -6,10 +6,6 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 
-
-
-
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -46,7 +42,7 @@ const routes = [
     },
   },
   {
-    path: "/forgotPassword",
+    path: "/forgotpassword",
     name: "ForgotPassword",
     component: ForgotPassword,
     meta: {

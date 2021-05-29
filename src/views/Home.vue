@@ -34,11 +34,13 @@
 </template>
 
 <script>
+import Arrow from "../assets/Icons/arrow-right-light.svg";
+
 import BlogCard from "../components/BlogCard.vue";
 import BlogPost from "../components/BlogPost.vue";
 export default {
   name: "Home",
-  components: { BlogPost, BlogCard },
+  components: { BlogPost, BlogCard, Arrow },
   data() {
     return {
       welcomeScreen: {

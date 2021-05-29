@@ -6,7 +6,8 @@
         <router-link
           class="router-link"
           :to="{ name: 'Register' }"
-        ></router-link>
+          >Register</router-link
+        >
       </p>
       <h2>Login to FireBlog</h2>
       <div class="inputs">
@@ -58,7 +59,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .form-wrap {
   overflow: hidden;
   display: flex;
