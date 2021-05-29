@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="updates">
+    <!-- <div class="updates">
       <div class="container">
         <h2>
           never miss a post. Register for your free account
@@ -29,18 +29,18 @@
           <Arrow class="arrow arrow-light" />
         </router-link>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import Arrow from "../assets/Icons/arrow-right-light.svg";
+// import Arrow from "../assets/Icons/arrow-right-light.svg";
 
 import BlogCard from "../components/BlogCard.vue";
 import BlogPost from "../components/BlogPost.vue";
 export default {
   name: "Home",
-  components: { BlogPost, BlogCard, Arrow },
+  components: { BlogPost, BlogCard },
   data() {
     return {
       welcomeScreen: {
