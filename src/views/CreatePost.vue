@@ -3,6 +3,7 @@
     <BlogCoverPreview
       v-show="this.$store.state.blogPhotoPreview"
     />
+    <Loading v-show="loading" />
     <div class="container">
       <div
         :class="{ invisible: !error }"
@@ -51,7 +52,7 @@
         />
       </div>
       <div class="blog-actions">
-        <button>Publish Blog</button>
+        <button @click="uploadBlog">Publish Blog</button>
         <router-link
           class="router-button"
           :to="{ name: 'BlogPreview' }"
@@ -63,9 +64,11 @@
 </template>
 
 <script>
+import Loading from "../components/Loading.vue";
 import BlogCoverPreview from "../components/BlogCoverPreview.vue";
 import firebase from "firebase/app";
 import "firebase/storage";
+import db from "../firebase/firebaseInit";
 import Quill from "quill";
 window.Quill = Quill;
 const ImageResize = require("quill-image-resize-module")
@@ -76,11 +79,14 @@ export default {
   name: "CreatePost",
   components: {
     BlogCoverPreview,
+    Loading,
   },
   data() {
     return {
+      file: null,
       error: null,
       errorMsg: null,
+      loading: null,
       editorSettings: {
         modules: {
           imageResize: {},
@@ -90,6 +96,61 @@ export default {
   },
 
   methods: {
+    uploadBlog() {
+      if (
+        this.blogTitle.length !== 0 &&
+        this.blogHTML.length !== 0
+      ) {
+        if (this.file) {
+          this.loading = true;
+          const storageRef = firebase.storage().ref();
+          const docRef = storageRef.child(
+            `document/BlogCoverPhotos/${this.$store.state.blogPhotoName}`
+          );
+          docRef.put(this.file).on(
+            "state_changed",
+            (snapshot) => {
+              console.log(snapshot);
+            },
+            (err) => {
+              console.log(err);
+              this.loading = false;
+            },
+            async () => {
+              const downloadURL = await docRef.getDownloadURL();
+              const timestamp = await Date.now();
+              const dataBase = await db
+                .collection("blogPosts")
+                .doc();
+
+              await dataBase.set({
+                blogID: dataBase.id,
+                blogHTML: this.blogHTML,
+                blogCoverPhoto: downloadURL,
+                blogTitle: this.blogTitle,
+                profileID: this.profileId,
+                date: timestamp,
+              });
+              this.loading = false;
+              this.$router.push({ name: "ViewBlog" });
+            }
+          );
+          return;
+        }
+        this.error = true;
+        this.errorMsg = "请填写博客信息";
+        setTimeout(() => {
+          this.error = false;
+        }, 5000);
+      }
+
+      this.error = true;
+      this.errorMsg = "请上传照片";
+      setTimeout(() => {
+        this.error = false;
+      }, 5000);
+      return;
+    },
     fileChange() {
       this.file = this.$refs.blogPhoto.files[0];
       const fileName = this.file.name;
@@ -207,7 +268,7 @@ export default {
     border-radius: 8px;
     color: #fff;
     margin-bottom: 10px;
-    background-color: #303030;
+    background-color: #ffd03f;
     opacity: 1;
     transition: 0.5s ease all;
 
