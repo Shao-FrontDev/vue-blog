@@ -1,12 +1,24 @@
 export default {
+  openPhotoPreview(state) {
+    state.blogPhotoPreview = !state.blogPhotoPreview;
+  },
+  updateBlogTitle(state, payload) {
+    state.blogTitle = payload;
+  },
+  fileNameChange(state, payload) {
+    state.blogPhotoName = payload;
+  },
+  createFileURL(state, payload) {
+    state.blogPhotoFileURL = payload;
+  },
+  newBlogPost(state, payload) {
+    state.blogHTML = payload;
+  },
   toggleEditPost(state, payload) {
     state.editPost = payload;
-    console.log(state.editPost);
   },
   setProfileInfo(state, doc) {
-    console.log("setProfileInfo", typeof state.user);
     state.profileId = doc.id;
-    console.log("doc.data", doc.data());
     state.profileEmail = doc.data().email;
     state.profileFirstName = doc.data().firstName;
     state.profileLastName = doc.data().lastName;
@@ -18,7 +30,6 @@ export default {
       state.profileLastName.match(/(\b\S)?/g).join("");
   },
   updateUser(state, payload) {
-    console.log("updateUser", payload);
     state.user = payload;
   },
   changeFirstName(state, payload) {

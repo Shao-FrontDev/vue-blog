@@ -9,7 +9,9 @@
           <router-link class="link" :to="{ name: 'Blogs' }"
             >Blogs</router-link
           >
-          <router-link class="link" to="#"
+          <router-link
+            class="link"
+            :to="{ name: 'CreatePost' }"
             >Create Post</router-link
           >
           <router-link
@@ -93,7 +95,9 @@
         <router-link class="link" :to="{ name: 'Blogs' }"
           >Blogs</router-link
         >
-        <router-link class="link" to="#"
+        <router-link
+          class="link"
+          :to="{ name: 'CreatePost' }"
           >Create Post</router-link
         >
         <router-link
@@ -274,7 +278,6 @@ header {
         }
 
         .profile-menu {
-          border: 1px solid #303030;
           border-radius: 8px;
           position: absolute;
           top: 60px;
@@ -283,7 +286,6 @@ header {
           background-color: #ffd03f;
           box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1),
             0 2px 4px -1px rgba(0, 0, 0, 0.06);
-
           .info {
             display: flex;
             align-items: center;

@@ -1,34 +1,39 @@
 <template>
   <div class="modal">
     <header>
-      <div class="icon" @click="closeModal">
+      <div class="icon" @click="closePreview">
         <Close class="close" />
       </div>
     </header>
     <div class="modal-content">
-      <p>{{ this.modalMessage }}</p>
+      <img :src="blogCoverPhoto" alt="" />
     </div>
   </div>
 </template>
 
 <script>
 import Close from "../assets/Icons/close.svg";
+
 export default {
-  props: {
-    modalMessage: {
-      type: String,
-    },
-  },
+  name: "BlogCoverPreview",
   components: {
     Close,
   },
+
   methods: {
-    closeModal() {
-      this.$emit("close-modal");
+    closePreview() {
+      this.$store.commit("openPhotoPreview");
+    },
+  },
+
+  computed: {
+    blogCoverPhoto() {
+      return this.$store.state.blogPhotoFileURL;
     },
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .modal {
   display: flex;
@@ -66,8 +71,9 @@ export default {
     border-top-right-radius: 0;
     width: 300px;
     min-height: 200px;
-    padding: 40px 30px;
+    padding: 20px;
     background-color: #ffd03f;
+    overflow: hidden;
 
     p {
       text-align: center;
@@ -76,6 +82,17 @@ export default {
 
     button {
       align-self: center;
+    }
+
+    img {
+      margin-top: 16px;
+      display: block;
+      width: auto;
+      height: 100%;
+      box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      border-radius: 8px;
     }
   }
 }

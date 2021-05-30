@@ -53,7 +53,7 @@ export default {
   name: "ForgotPassword",
   data() {
     return {
-      modalActive: null,
+      modalActive: true,
       modalMessage: "",
       email: "",
       loading: false,
