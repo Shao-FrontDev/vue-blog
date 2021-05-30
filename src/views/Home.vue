@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <BlogPost :post="welcomeScreen" />
+    <BlogPost v-if="!user" :post="welcomeScreen" />
     <BlogPost
       :post="item"
       v-for="(item, index) in sampleBlogPost"
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="updates">
+    <div class="updates" v-if="!user">
       <div class="container">
         <h2>
           never miss a post. Register for your free account
@@ -29,7 +29,7 @@
           <Arrow class="arrow arrow-light" />
         </router-link>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -66,6 +66,9 @@ export default {
   computed: {
     sampleBlogCards() {
       return this.$store.state.sampleBlogCards;
+    },
+    user() {
+      return this.$store.state.user;
     },
   },
 };

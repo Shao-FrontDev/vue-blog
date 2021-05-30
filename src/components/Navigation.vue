@@ -12,7 +12,7 @@
           <router-link class="link" to="#"
             >Create Post</router-link
           >
-          <router-link class="link" :to="{ name: 'Login' }"
+          <router-link v-if="!user" class="link" :to="{ name: 'Login' }"
             >Login/Register</router-link
           >
         </ul>
@@ -87,7 +87,7 @@
         <router-link class="link" to="#"
           >Create Post</router-link
         >
-        <router-link class="link" :to="{ name: 'Login' }"
+        <router-link v-if="!user" class="link" :to="{ name: 'Login' }"
           >Login/Register</router-link
         >
       </ul>
@@ -155,7 +155,6 @@ export default {
     },
   },
   computed: {
-    // 待解决的bug
     user() {
       return this.$store.state.user;
     },
