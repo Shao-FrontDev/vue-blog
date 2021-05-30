@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import Admin from "../views/Admin.vue";
 import Profile from "../views/Profile.vue";
 import Register from "../views/Register.vue";
+import BlogPreview from "../views/BlogPreview.vue";
 import CreatePost from "../views/CreatePost.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 
@@ -69,11 +70,19 @@ const routes = [
     },
   },
   {
-    path: "/createpost",
+    path: "/create-post",
     name: "CreatePost",
     component: CreatePost,
     meta: {
       title: "CreatePost",
+    },
+  },
+  {
+    path: "/post-preview",
+    name: "BlogPreview",
+    component: BlogPreview,
+    meta: {
+      title: "BlogPreview",
     },
   },
 ];

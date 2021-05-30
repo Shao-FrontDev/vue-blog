@@ -52,7 +52,9 @@
       </div>
       <div class="blog-actions">
         <button>Publish Blog</button>
-        <router-link class="router-button" to="#"
+        <router-link
+          class="router-button"
+          :to="{ name: 'BlogPreview' }"
           >Post Preview</router-link
         >
       </div>
