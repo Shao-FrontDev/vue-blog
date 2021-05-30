@@ -4,6 +4,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import db from "../firebase/firebaseInit";
 
+import mutations from "./mutations.js";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -35,34 +37,11 @@ export default new Vuex.Store({
     profileEmail: null,
     profileFirstName: null,
     profileLastName: null,
-    profileusername: null,
+    profileUsername: null,
     profileId: null,
     profileInitials: null,
   },
-  mutations: {
-    toggleEditPost(state, payload) {
-      state.editPost = payload;
-      console.log(state.editPost);
-    },
-    setProfileInfo(state, doc) {
-      console.log("setProfileInfo", typeof state.user);
-      state.profileId = doc.id;
-      console.log("doc.data", doc.data());
-      state.profileEmail = doc.data().email;
-      state.profileFirstName = doc.data().firstName;
-      state.profileLastName = doc.data().lastName;
-      state.profileusername = doc.data().username;
-    },
-    setProfileInitials(state) {
-      state.profileInitials =
-        state.profileFirstName.match(/(\b\S)?/g).join("") +
-        state.profileLastName.match(/(\b\S)?/g).join("");
-    },
-    updateUser(state, payload) {
-      console.log("updateUser", payload);
-      state.user = payload;
-    },
-  },
+  mutations,
   actions: {
     async getCurrentUser({ commit }) {
       const dataBase = await db
@@ -70,6 +49,18 @@ export default new Vuex.Store({
         .doc(firebase.auth().currentUser.uid);
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
+      commit("setProfileInitials");
+    },
+    async updateUserSettings({ commit, state }) {
+      const dataBase = await db
+        .collection("users")
+        .doc(state.profileId);
+
+      await dataBase.update({
+        firstName: state.profileFirstName,
+        lastName: state.profileLastName,
+        username: state.profileUsername,
+      });
       commit("setProfileInitials");
     },
   },
